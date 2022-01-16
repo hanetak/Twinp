@@ -7,6 +7,9 @@ public class Player : Token
     //左を向いているかどうか
     bool _bFacingLeft = false;
 
+    //ゲームクリアテキスト
+    public GameObject _textGameclear = null;
+
     //状態
     enum eState
     {
@@ -32,7 +35,10 @@ public class Player : Token
         return _isR;
     }
 
-
+    void Start()
+    {
+        _textGameclear.SetActive(false);
+    }
     //固定フレームで更新
     private void FixedUpdate()
     {
@@ -143,6 +149,7 @@ public class Player : Token
         {
             _JumpCount = 2;
         }
+
     }
 
     //地面に着地しているかどうか
@@ -160,11 +167,21 @@ public class Player : Token
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(px, Y), -Vector2.up, distance, mask);
             if (hit.collider != null)
             {
+                Debug.Log("設置してるンゴ");
                 //着地できた
                 return true;
             }
         }
         return false;
+    }
+
+    //ゴール判定
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Goal")
+        {
+            _textGameclear.SetActive(true);
+        }
     }
 
 }
