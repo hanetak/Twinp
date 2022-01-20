@@ -33,4 +33,10 @@ public class Grobal
     {
         
     }
+
+    //中間地点を設置
+    public static void SetRespawn(Vector2 pos){
+        _retryPos = pos;
+        _retryPos.y = _retryPos.y + 1;
+    }
 }

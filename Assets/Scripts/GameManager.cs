@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,9 +24,10 @@ public class GameManager : MonoBehaviour
             //R押したらプレイヤーを戻す+テキストを消す
             if(Input.GetKeyDown(KeyCode.R)){
                 _textGameover.SetActive(false);
-                _playerChara.transform.position = _playerPos;
+                _playerChara.transform.position = Grobal.RetryPos;
 
             }
         }
+
     }
 }

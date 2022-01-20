@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Player : Token
 {
+    private AudioSource audio;
+    //ジャンプ音
+    [SerializeField] AudioClip _jumpAudio;
+
     //左を向いているかどうか
     bool _bFacingLeft = false;
 
     //ゲームクリアテキスト
-    public GameObject _textGameclear = null;
+    [SerializeField] GameObject _textGameclear;
 
     //状態
     enum eState
@@ -38,6 +42,8 @@ public class Player : Token
     void Start()
     {
         _textGameclear.SetActive(false);
+        audio = GetComponent<AudioSource>();
+        
     }
     //固定フレームで更新
     private void FixedUpdate()
@@ -136,8 +142,11 @@ public class Player : Token
         //ジャンプ判定
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // ジャンプする
             if (_JumpCount > 1)
             {
+                audio.PlayOneShot(_jumpAudio);
+
                 _isR = !_isR;
                 VY = _JumpSpeed;;
 
@@ -167,7 +176,6 @@ public class Player : Token
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(px, Y), -Vector2.up, distance, mask);
             if (hit.collider != null)
             {
-                Debug.Log("設置してるンゴ");
                 //着地できた
                 return true;
             }
@@ -175,12 +183,18 @@ public class Player : Token
         return false;
     }
 
-    //ゴール判定
+    //衝突判定
     void OnTriggerEnter2D(Collider2D col)
     {
+        //ゴール判定
         if (col.gameObject.tag == "Goal")
         {
             _textGameclear.SetActive(true);
+        }
+        //中間設定
+        if (col.gameObject.tag == "Respawn")
+        {
+            Grobal.SetRespawn(col.gameObject.transform.position);
         }
     }
 
