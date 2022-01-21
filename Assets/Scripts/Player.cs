@@ -8,6 +8,7 @@ public class Player : Token
     //ジャンプ音
     [SerializeField] AudioClip _jumpAudio;
 
+
     //左を向いているかどうか
     bool _bFacingLeft = false;
 
@@ -198,5 +199,6 @@ public class Player : Token
             Grobal.SetRespawn(col.gameObject.transform.position);
         }
     }
+
 
 }
