@@ -759,8 +759,8 @@ GameObject:
   - component: {fileID: 574899349}
   - component: {fileID: 574899348}
   - component: {fileID: 574899347}
-  - component: {fileID: 574899351}
   - component: {fileID: 574899352}
+  - component: {fileID: 574899351}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -921,12 +921,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 574899344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ebf63268a36e46b0bc4c7c1d00743f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 21bb3c3c4a642ae4991aa43023897cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpAudio: {fileID: 8300000, guid: 5d07f6e82d3f55f4a8f3270a7c7d38cd, type: 3}
   _textGameclear: {fileID: 578706477}
-  _buttonGameclear: {fileID: 203955639}
   Sprite0: {fileID: 4662123735922085908, guid: a0b22eb10d6b04b4480e768262016387, type: 3}
   Sprite1: {fileID: -7585659800269097655, guid: a0b22eb10d6b04b4480e768262016387,
     type: 3}
@@ -934,8 +933,8 @@ MonoBehaviour:
   Sprite3: {fileID: -4233687259053497096, guid: a0b22eb10d6b04b4480e768262016387,
     type: 3}
   _RunSpeed: 2
-  _JumpSpeed: 5
-  _JumpCount: 0
+  _JumpSpeed: 4
+  _JumpCount: 2
 --- !u!82 &574899352
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1235,7 +1234,7 @@ PrefabInstance:
     - target: {fileID: 3432214402698523472, guid: 5ae3d9adee7c34c20b18f5e0ff17a526,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3432214402698523472, guid: 5ae3d9adee7c34c20b18f5e0ff17a526,
         type: 3}
@@ -1718,7 +1717,7 @@ PrefabInstance:
     - target: {fileID: 3432214402698523472, guid: 5ae3d9adee7c34c20b18f5e0ff17a526,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3432214402698523472, guid: 5ae3d9adee7c34c20b18f5e0ff17a526,
         type: 3}

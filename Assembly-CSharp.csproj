@@ -36,15 +36,14 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\FieldMgr.cs" />
      <Compile Include="Assets\Scripts\FloorMove.cs" />
      <Compile Include="Assets\Scripts\FollowCamera.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Scripts\GameMgr.cs" />
      <Compile Include="Assets\Scripts\Grobal.cs" />
      <Compile Include="Assets\Scripts\Layer2D.cs" />
      <Compile Include="Assets\Scripts\MyAssetPostProcessor.cs" />
      <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
+     <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Respawn.cs" />
      <Compile Include="Assets\Scripts\Reverse.cs" />
      <Compile Include="Assets\Scripts\SceneMgr.cs" />
