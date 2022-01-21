@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject _textGameover = null;
-    public GameObject _playerChara = null;
+    [SerializeField] GameObject _textGameover = null;
+    [SerializeField] GameObject _playerChara = null;
 
-    public Vector2 _playerPos = new Vector2(0.05f,0.63f);
+    private GameObject _startObj = null;
+
+    [SerializeField] Vector2 _playerPos = new Vector2(0.05f,0.63f);
 
     // Start is called before the first frame update
     void Start()
     {
         _textGameover.SetActive(false);
+        _startObj = GameObject.FindGameObjectWithTag("Start");
+        Grobal.SetRespawn(_startObj.transform.position);
     }
 
     // Update is called once per frame

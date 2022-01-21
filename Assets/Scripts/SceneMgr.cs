@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneMgr : MonoBehaviour
 {
-    public GameObject ButtonStart;
-    public GameObject ButtonCont;
+    [SerializeField] GameObject ButtonStart;
+    [SerializeField] GameObject ButtonCont;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,5 +22,10 @@ public class SceneMgr : MonoBehaviour
         public void PressStart()
      {
          SceneManager.LoadScene("Stage1");
+     }
+
+     public void PressNext(){
+         int i = 1;
+         SceneManager.LoadScene($"Stage{i}");
      }
 }
