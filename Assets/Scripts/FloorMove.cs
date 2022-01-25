@@ -48,7 +48,6 @@ public class FloorMove : Token
         float dx = X - _xprevious;
         if(_target != null)
         {
-            Debug.Log("動く"+dx);
             //上にターゲットが乗っていたら動かす
             _target.X += dx;
         }
@@ -81,10 +80,9 @@ public class FloorMove : Token
         this.transform.position = pos;
     }
 
-    private void OnCollisionEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         string name = LayerMask.LayerToName(other.gameObject.layer);
-        Debug.Log("当たった"+ name);
         if (name == "Ground")
         {
             if(X != _xprevious)
@@ -103,7 +101,7 @@ public class FloorMove : Token
             _target = other.gameObject.GetComponent<Player>();
         }
     }
-    private void OnCollisionExit2D(Collider2D otehr)
+    private void OnCollisionExit2D(Collision2D otehr)
     {
         string name = LayerMask.LayerToName(otehr.gameObject.layer);
         if(name == "Player")

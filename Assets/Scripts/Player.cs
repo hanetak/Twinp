@@ -5,8 +5,14 @@ using UnityEngine;
 public class Player : Token
 {
     private AudioSource audioSource;
+    //パーティクル
+    [SerializeField] GameObject Particle;
+
     //ジャンプ音
     [SerializeField] AudioClip _jumpAudio;
+
+    //ゲームオーバーテキスト
+    [SerializeField] GameObject _textGameover = null;
 
 
     //左を向いているかどうか
@@ -29,14 +35,17 @@ public class Player : Token
 
 
     //各種スプライト
-    public Sprite Sprite0;
-    public Sprite Sprite1;
-    public Sprite Sprite2;
-    public Sprite Sprite3;
+    [SerializeField] Sprite Sprite0;
+    [SerializeField] Sprite Sprite1;
+    [SerializeField] Sprite Sprite2;
+    [SerializeField] Sprite Sprite3;
+
+    [SerializeField] Sprite SpriteNull;
 
     //反転させる
     bool _isR = true;
-    public bool isReverse(){
+    public bool isReverse()
+    {
         return _isR;
     }
 
@@ -44,68 +53,74 @@ public class Player : Token
     {
         _textGameclear.SetActive(false);
         audioSource = GetComponent<AudioSource>();
-        
+
     }
     //固定フレームで更新
     private void FixedUpdate()
     {
-        //左右の向きを切り替える
-        if(_bFacingLeft){
-            //左向き
-            ScaleX = -1.0f;
-        }else
+        if (!_isLocked)
         {
-            ScaleX = 1.0f;
-        }
-        //アニメーションタイマーを更新
-        _tAnim++;
-        //状態更新
-        if (_bGround == false)
-        {
-            //ジャンプ状態
-            _state = eState.Jump;
-        }
-        else if (Mathf.Abs(VX) >= 1.0f)
-        {
-            //移動しているので走り状態
-            _state = eState.Run;
-        }
-        else
-        {
-            //待機状態
-            _state = eState.Idle;
-        }
+            //左右の向きを切り替える
+            if (_bFacingLeft)
+            {
+                //左向き
+                ScaleX = -1.0f;
+            }
+            else
+            {
+                ScaleX = 1.0f;
+            }
+            //アニメーションタイマーを更新
+            _tAnim++;
+            //状態更新
+            if (_bGround == false)
+            {
+                //ジャンプ状態
+                _state = eState.Jump;
+            }
+            else if (Mathf.Abs(VX) >= 1.0f)
+            {
+                //移動しているので走り状態
+                _state = eState.Run;
+            }
+            else
+            {
+                //待機状態
+                _state = eState.Idle;
+            }
 
-        //アニメーション更新
-        switch (_state)
-        {
-            case eState.Idle:
-                if (_tAnim % 100 < 10)
-                {
-                    //たまに瞬きする
-                    SetSprite(Sprite1);
-                }
-                else
-                {
-                    SetSprite(Sprite0);
-                }
-                break;
-            case eState.Run:
-                if (_tAnim % 12 < 6)
-                {
+            //アニメーション更新
+            switch (_state)
+            {
+                case eState.Idle:
+                    if (_tAnim % 100 < 10)
+                    {
+                        //たまに瞬きする
+                        SetSprite(Sprite1);
+                    }
+                    else
+                    {
+                        SetSprite(Sprite0);
+                    }
+                    break;
+                case eState.Run:
+                    if (_tAnim % 12 < 6)
+                    {
+                        SetSprite(Sprite2);
+                    }
+                    else
+                    {
+                        SetSprite(Sprite3);
+                    }
+                    break;
+
+                case eState.Jump:
+                    //ジャンプ中
                     SetSprite(Sprite2);
-                }
-                else
-                {
-                    SetSprite(Sprite3);
-                }
-                break;
-
-            case eState.Jump:
-                //ジャンプ中
-                SetSprite(Sprite2);
-                break;
+                    break;
+            }
         }
+
     }
     //走る速さ
     [SerializeField]
@@ -122,42 +137,66 @@ public class Player : Token
     //地面に着地しているかどうか
     bool _bGround = false;
 
+    bool _isLocked = false;
+
 
     void Update()
     {
-        //左右キーで移動する
-        Vector2 v = Util.GetInputVector();
-        VX = v.x * _RunSpeed;
-
-        //向いている方向チェック
-        if(VX <= -1.0f){
-            //左を向く
-            _bFacingLeft = true;
-        }
-        if(VX >= 1.0f){
-            //右を向く
-            _bFacingLeft　= false;
-        }
-
-        _bGround = CheckGround();
-        //ジャンプ判定
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!_isLocked)
         {
-            // ジャンプする
-            if (_JumpCount > 1)
+            if (this.gameObject.transform.position.y < -5.5f)
             {
-                audioSource.PlayOneShot(_jumpAudio);
-
-                _isR = !_isR;
-                VY = _JumpSpeed;;
-
-                _JumpCount --;
+                GameOver();
             }
+
+            //左右キーで移動する
+            Vector2 v = Util.GetInputVector();
+            VX = v.x * _RunSpeed;
+
+            //向いている方向チェック
+            if (VX <= -1.0f)
+            {
+                //左を向く
+                _bFacingLeft = true;
+            }
+            if (VX >= 1.0f)
+            {
+                //右を向く
+                _bFacingLeft = false;
+            }
+
+            _bGround = CheckGround();
+            //ジャンプ判定
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                // ジャンプする
+                if (_JumpCount > 1)
+                {
+                    audioSource.PlayOneShot(_jumpAudio);
+
+                    _isR = !_isR;
+                    VY = _JumpSpeed; ;
+
+                    _JumpCount--;
+                }
+            }
+            //ジャンプ回数をリセット
+            if (_bGround)
+            {
+                _JumpCount = 2;
+            }
+
         }
-        //ジャンプ回数をリセット
-        if (_bGround)
+        else
         {
-            _JumpCount = 2;
+            //R押したらプレイヤーを戻す+テキストを消す
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _textGameover.SetActive(false);
+                SetSprite(Sprite0);
+                this.gameObject.transform.position = Grobal.RetryPos;
+                _isLocked = false;
+            }
         }
 
     }
@@ -184,7 +223,6 @@ public class Player : Token
         return false;
     }
 
-    //ゴール判定
     //衝突判定
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -198,6 +236,27 @@ public class Player : Token
         {
             Grobal.SetRespawn(col.gameObject.transform.position);
         }
+
+
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        //障害物判定（即死）
+        if (col.gameObject.tag == "Obstacle")
+        {
+            GameOver();
+        }
+    }
+
+    //ゲームオーバー字処理
+    void GameOver()
+    {
+        _isLocked = true;
+        SetSprite(null);
+        this.RigidBody.velocity = Vector3.zero;
+        _textGameover.SetActive(true);
+        GameObject.Instantiate<GameObject>(Particle, this.gameObject.transform.position, Quaternion.identity);
     }
 
 

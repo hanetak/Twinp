@@ -22,16 +22,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_playerChara.transform.position.y < -5.5f){
-            _textGameover.SetActive(true);
-
-            //R押したらプレイヤーを戻す+テキストを消す
-            if(Input.GetKeyDown(KeyCode.R)){
-                _textGameover.SetActive(false);
-                _playerChara.transform.position = Grobal.RetryPos;
-
-            }
-        }
 
     }
 }
