@@ -26,7 +26,7 @@ public class FloorMove : Token
     private Vector2 _moveDistance;
 
     float _xprevious = 0;
-
+    float _yprevious = 0;
     private Rigidbody2D _rigitBody2D;
 
     //プレイヤーの参照
@@ -34,11 +34,25 @@ public class FloorMove : Token
 
     void Start(){
         _rigitBody2D = this.GetComponent<Rigidbody2D> ();
-        //開始時は右に進むようにする
-        SetVelocityXY(_moveSpd, 0);
+        //開始時の動き
+        if(_isMoveX){
+            if(_isMoveXRight){
+                SetVelocityXY(_moveSpd, 0);
+            }else{
+                SetVelocityXY(-_moveSpd, 0);
+            }
+        }
+        if(_isMoveY){
+            if(_isMoveYUp){
+                SetVelocityXY(0,_moveSpd);
+            }else{
+                SetVelocityXY(0,-_moveSpd);
+            }
+        }
 
         //初期座標を保持
         _xprevious = X;
+        _yprevious = Y;
     }
 
     void Update()
@@ -46,13 +60,16 @@ public class FloorMove : Token
         Vector2 pos = this.gameObject.transform.position; 
          //前回の座標から差分を求める
         float dx = X - _xprevious;
+        float dy = Y - _yprevious;
         if(_target != null)
         {
             //上にターゲットが乗っていたら動かす
             _target.X += dx;
+            _target.Y += dy;
         }
         //げんざいの座標を次のように保存
         _xprevious = X;
+        _yprevious = Y;
         if(_isMoveX)
         {
             //右向きかつ始点よりも大きい場合
@@ -74,6 +91,30 @@ public class FloorMove : Token
                 {
                     _isMoveXRight = true;
                     SetVelocityXY(_moveSpd, 0);
+                }
+            }
+        }
+        if(_isMoveY)
+        {
+            //上向き
+            if(pos.y >= _Ystart && _isMoveYUp)
+            {
+                //終点よりも座標が大きくなったら切り替える
+                if(pos.y > _Yend)
+                {
+                    _isMoveYUp = false;
+                    SetVelocityXY(0, -_moveSpd);
+                }
+            }
+            //下向き
+            if(pos.y <= _Yend && !_isMoveYUp)
+            {
+
+                //始点よりも座標が小さくなったら切り替える
+                if(pos.y < _Ystart)
+                {
+                    _isMoveYUp = true;
+                    SetVelocityXY(0, _moveSpd);
                 }
             }
         }
@@ -101,9 +142,9 @@ public class FloorMove : Token
             _target = other.gameObject.GetComponent<Player>();
         }
     }
-    private void OnCollisionExit2D(Collision2D otehr)
+    private void OnCollisionExit2D(Collision2D other)
     {
-        string name = LayerMask.LayerToName(otehr.gameObject.layer);
+        string name = LayerMask.LayerToName(other.gameObject.layer);
         if(name == "Player")
         {
             //プレイヤーがいなくなったので参照を消す

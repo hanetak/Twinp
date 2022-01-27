@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Reverse : MonoBehaviour
 {
-    [SerializeField]
-    bool isActive = true;
+    [SerializeField] public bool isActive = true;
     bool b;
     GameObject playerObject;
     Player player;

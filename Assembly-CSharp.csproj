@@ -36,11 +36,15 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Arrow.cs" />
+     <Compile Include="Assets\Scripts\Fire.cs" />
      <Compile Include="Assets\Scripts\FloorMove.cs" />
+     <Compile Include="Assets\Scripts\FloorRotate.cs" />
      <Compile Include="Assets\Scripts\FollowCamera.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Grobal.cs" />
      <Compile Include="Assets\Scripts\Layer2D.cs" />
+     <Compile Include="Assets\Scripts\MoveSin.cs" />
      <Compile Include="Assets\Scripts\MyAssetPostProcessor.cs" />
      <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\Obstacle.cs" />

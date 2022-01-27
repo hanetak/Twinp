@@ -214,7 +214,7 @@ public class Player : Token
         {
             //チェック実行
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(px, Y), -Vector2.up, distance, mask);
-            if (hit.collider != null)
+            if (hit.collider != null && hit.collider.gameObject.GetComponent<Reverse>().isActive)
             {
                 //着地できた
                 return true;
