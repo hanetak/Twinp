@@ -10,7 +10,7 @@ public class Fire : MonoBehaviour
 
     Vector2 _force;
     [SerializeField] float _spd;
-    [SerializeField] float _posY;
+    [SerializeField] float _posY_low;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +26,7 @@ public class Fire : MonoBehaviour
     void Update()
     {
         _pos = this.gameObject.transform.position;
-        if(_pos.y < _posY && rb.velocity.y < 0)
+        if(_pos.y <= _posY_low && rb.velocity.y < 0)
         {
             rb.velocity = Vector2.zero;
             rb.AddForce(_force);

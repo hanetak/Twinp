@@ -58,7 +58,10 @@
      <Compile Include="Assets\Scripts\TokenMgr.cs" />
      <Compile Include="Assets\Scripts\Util.cs" />
      <Compile Include="Assets\Scripts\Wall.cs" />
+     <Compile Include="Assets\WorldSkies\Demo\Scripts\LookCamera.cs" />
+     <Compile Include="Assets\WorldSkies\Demo\Scripts\SkyboxChanger.cs" />
      <None Include="Assets\Resources\Levels\001.xml" />
+     <None Include="Assets\Sprites\BackGround.shader" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2019.4.34f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
