@@ -5,17 +5,17 @@ using UnityEngine;
 public class FloorMove : Token
 {
 
-    [SerializeField] float _Xstart;
-    [SerializeField] float _Xend;
-    [SerializeField] float _Ystart;
-    [SerializeField] float _Yend;
+    public float _Xstart;
+    public float _Xend;
+    public float _Ystart;
+    public float _Yend;
 
-    [SerializeField] float _moveSpd;
+    public float _moveSpd;
 
-    [SerializeField] bool _isMoveX;
-    [SerializeField] bool _isMoveXRight;
-    [SerializeField] bool _isMoveY;
-    [SerializeField] bool _isMoveYUp;
+    public bool _isMoveX = false;
+    public bool _isMoveXRight;
+    public bool _isMoveY = false;
+    public bool _isMoveYUp;
     private float _Xpos;
     private float _Ypos;
 
