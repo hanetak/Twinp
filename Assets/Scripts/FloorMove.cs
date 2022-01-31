@@ -124,19 +124,8 @@ public class FloorMove : Token
     private void OnCollisionEnter2D(Collision2D other)
     {
         string name = LayerMask.LayerToName(other.gameObject.layer);
-        if (name == "Ground")
-        {
-            if(X != _xprevious)
-            {
-                //ほかの壁、床と当たったら反転
-                VX *= -1;
-                //X座標を一フレーム前のX座標に戻す
-                X = _xprevious;
-  
-            }
 
-        }
-        else if(name == "Player")
+        if(name == "Player")
         {
             //プレイヤーに当たったので参照を保持
             _target = other.gameObject.GetComponent<Player>();

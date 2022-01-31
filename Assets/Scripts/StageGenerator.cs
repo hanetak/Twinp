@@ -65,6 +65,25 @@ public class StageGenerator : MonoBehaviour
                     floorMove._Ystart = Mathf.Min(y1,y2);
                     floorMove._moveSpd = Random.Range(0.1f,4.0f);
                 }
+                else if(index == 17)
+                {
+                    //左右に動くブロック
+                    float x = posx + (float)i + Random.Range(-0.25f,0.25f);
+                    float y = (float)j - 4 + Random.Range(-0.25f,0.25f);
+                    int isAct = Random.Range(0,2);
+                    GameObject newObject = GameObject.Instantiate<GameObject>(grounds[2]);
+                    newObject.transform.position = new Vector3(x,y,this.transform.position.z);
+                    newObject.GetComponent<Reverse>().isActive = isAct == 1 ? true : false;
+                    FloorMove floorMove =  newObject.GetComponent<FloorMove>();
+                    floorMove._isMoveX = true;
+                    int isRi = Random.Range(0,2);
+                    floorMove._isMoveXRight = isRi == 1 ? true : false;
+                    float x1 = Random.Range(-4f,4f);
+                    float x2 = Random.Range(-4f,4f);
+                    floorMove._Xend = x + Mathf.Max(x1,x2);
+                    floorMove._Xstart = x + Mathf.Min(x1,x2);
+                    floorMove._moveSpd = Random.Range(0.1f,4.0f);
+                }
 
             }
         }

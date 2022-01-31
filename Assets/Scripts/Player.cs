@@ -220,7 +220,7 @@ public class Player : Token
         int mask = 1 << LayerMask.NameToLayer("Ground");
         //キャラクタの半分よりちょっと下までレイを飛ばす
         float distance = SpriteHeight * 0.6f;
-        float width = BoxColliderWidth * 0.6f;
+        float width = BoxColliderWidth * 0.8f;
         float[] xList = { X - width, X, X + width };
         foreach (float px in xList)
         {
