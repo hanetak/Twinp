@@ -37,6 +37,8 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Arrow.cs" />
+     <Compile Include="Assets\Scripts\CameraMover.cs" />
+     <Compile Include="Assets\Scripts\Delete.cs" />
      <Compile Include="Assets\Scripts\Fire.cs" />
      <Compile Include="Assets\Scripts\FloorMove.cs" />
      <Compile Include="Assets\Scripts\FloorRotate.cs" />
@@ -46,13 +48,13 @@
      <Compile Include="Assets\Scripts\Layer2D.cs" />
      <Compile Include="Assets\Scripts\MoveSin.cs" />
      <Compile Include="Assets\Scripts\MyAssetPostProcessor.cs" />
-     <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\Obstacle.cs" />
      <Compile Include="Assets\Scripts\Particle.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Respawn.cs" />
      <Compile Include="Assets\Scripts\Reverse.cs" />
      <Compile Include="Assets\Scripts\SceneMgr.cs" />
+     <Compile Include="Assets\Scripts\StageGenerator.cs" />
      <Compile Include="Assets\Scripts\TMXLoader.cs" />
      <Compile Include="Assets\Scripts\Token.cs" />
      <Compile Include="Assets\Scripts\TokenMgr.cs" />

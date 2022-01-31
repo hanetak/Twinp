@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject _startObj = null;
 
-    [SerializeField] Vector2 _playerPos = new Vector2(0.05f,0.63f);
+    [SerializeField] Vector2 _playerPos;
 
     // Start is called before the first frame update
     void Start()

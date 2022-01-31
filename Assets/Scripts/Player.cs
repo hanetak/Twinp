@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Token
 {
@@ -44,6 +45,8 @@ public class Player : Token
 
     //反転させる
     bool _isR = true;
+
+    bool isJump = false;
     public bool isReverse()
     {
         return _isR;
@@ -138,6 +141,8 @@ public class Player : Token
     bool _bGround = false;
 
     bool _isLocked = false;
+    [SerializeField]float _timer;
+    [SerializeField] GameObject s;
 
 
     void Update()
@@ -169,6 +174,7 @@ public class Player : Token
             //ジャンプ判定
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                isJump = true;
                 // ジャンプする
                 if (_JumpCount > 1)
                 {
@@ -192,13 +198,19 @@ public class Player : Token
             //R押したらプレイヤーを戻す+テキストを消す
             if (Input.GetKeyDown(KeyCode.R))
             {
+                SceneManager.LoadScene("stage1");
                 _textGameover.SetActive(false);
                 SetSprite(Sprite0);
                 this.gameObject.transform.position = Grobal.RetryPos;
                 _isLocked = false;
             }
         }
-
+        _timer -= Time.deltaTime;
+        /*if(isJump && _timer < 0){
+           Debug.Log(this.gameObject.transform.position);
+           Instantiate(s,this.gameObject.transform.position,Quaternion.identity);
+           _timer = 0.1f;
+        }*/
     }
 
     //地面に着地しているかどうか

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 197760402086080824}
   - component: {fileID: -8271840472156779583}
   - component: {fileID: 1323211172}
+  - component: {fileID: -7615738260860552852}
   m_Layer: 8
   m_Name: Yuka_W
   m_TagString: Untagged
@@ -122,3 +123,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
+--- !u!114 &-7615738260860552852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275462839701298467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8967d3363e027c4cb4479fc96e880fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
