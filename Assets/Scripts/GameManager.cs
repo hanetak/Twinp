@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         _textGameover.SetActive(false);
         _startObj = GameObject.FindGameObjectWithTag("Start");
         Grobal.SetRespawn(_startObj.transform.position);
+        Grobal.Init();
     }
 
     // Update is called once per frame

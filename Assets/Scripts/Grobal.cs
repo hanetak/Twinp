@@ -9,6 +9,7 @@ public class Grobal
     {
         _retryPos = new Vector2(0,0);
         _playerLife = 3;
+        _score = 0;
     }
     //リトライする位置
     static Vector2 _retryPos;
@@ -20,6 +21,17 @@ public class Grobal
     static int _playerLife;
     public static int PlayerRife{
         get{return _playerLife; }
+    }
+
+    //スコア
+    static int _score;
+    public static int Score
+    {
+        get { return _score; }
+    }
+
+    public static void ScoreAdd(int scoreAdd){
+        _score += scoreAdd;
     }
 
     // Start is called before the first frame update

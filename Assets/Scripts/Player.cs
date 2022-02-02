@@ -142,6 +142,8 @@ public class Player : Token
     [SerializeField]float _timer;
     [SerializeField] GameObject s;
 
+    [SerializeField]float _scoreIndex;
+
     public bool _isJump;
 
 
@@ -154,6 +156,8 @@ public class Player : Token
                 GameOver();
             }
 
+            //スコアを加算する
+            Grobal.ScoreAdd((int)(Time.deltaTime * _scoreIndex));
             //左右キーで移動する
             Vector2 v = Util.GetInputVector();
             VX = v.x * _RunSpeed;
@@ -202,6 +206,7 @@ public class Player : Token
                 _textGameover.SetActive(false);
                 SetSprite(Sprite0);
                 this.gameObject.transform.position = Grobal.RetryPos;
+                SceneManager.UnloadSceneAsync(3);
                 _isLocked = false;
             }
         }
@@ -270,6 +275,7 @@ public class Player : Token
         this.RigidBody.velocity = Vector3.zero;
         _textGameover.SetActive(true);
         GameObject.Instantiate<GameObject>(Particle, this.gameObject.transform.position, Quaternion.identity);
+        naichilab.RankingLoader.Instance.SendScoreAndShowRanking(Grobal.Score);
     }
 
 
