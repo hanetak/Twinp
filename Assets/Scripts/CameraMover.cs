@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMover : MonoBehaviour
 {
-    [SerializeField] float spd;
+    public float spd;
     Vector3 pos;
     // Start is called before the first frame update
     void Start()

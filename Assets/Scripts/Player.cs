@@ -42,6 +42,9 @@ public class Player : Token
     [SerializeField] Sprite Sprite3;
 
     [SerializeField] Sprite SpriteNull;
+   //カメラ消す
+    GameObject _camera;
+
 
     //反転させる
     bool _isR = true;
@@ -54,11 +57,17 @@ public class Player : Token
     {
         _textGameclear.SetActive(false);
         audioSource = GetComponent<AudioSource>();
+        _camera = GameObject.FindGameObjectWithTag("MainCamera");
 
     }
     //固定フレームで更新
     private void FixedUpdate()
     {
+        if (this.gameObject.transform.position.x < _camera.transform.position.x - 10f)
+        {
+            GameOver();
+            this.gameObject.transform.position = _camera.transform.position;
+        }
         if (!_isLocked)
         {
             //左右の向きを切り替える
@@ -275,6 +284,7 @@ public class Player : Token
         this.RigidBody.velocity = Vector3.zero;
         _textGameover.SetActive(true);
         GameObject.Instantiate<GameObject>(Particle, this.gameObject.transform.position, Quaternion.identity);
+        _camera.GetComponent<CameraMover>().spd = 0;
         naichilab.RankingLoader.Instance.SendScoreAndShowRanking(Grobal.Score);
     }
 
