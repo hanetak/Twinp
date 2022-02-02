@@ -57,6 +57,14 @@ public class FloorMove : Token
 
     void Update()
     {
+        if (_target != null)
+        {
+            if (_target._isJump)
+            {
+                Debug.Log("ターゲットから離れた");
+                _target = null;
+            }
+        }
         Vector2 pos = this.gameObject.transform.position; 
          //前回の座標から差分を求める
         float dx = X - _xprevious;

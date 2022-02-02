@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -142,10 +142,7 @@ public class Player : Token
     [SerializeField]float _timer;
     [SerializeField] GameObject s;
 
-    static bool _isJump;
-    public static bool IsJump{
-        set{return _isJump; }
-    }
+    public bool _isJump;
 
 
     void Update()
@@ -177,10 +174,10 @@ public class Player : Token
             //ジャンプ判定
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _isJump = true;
                 // ジャンプする
                 if (_JumpCount > 1)
                 {
+                    _isJump = true;
                     audioSource.PlayOneShot(_jumpAudio);
 
                     _isR = !_isR;
@@ -222,8 +219,8 @@ public class Player : Token
         //Groundグループのみチェックする
         int mask = 1 << LayerMask.NameToLayer("Ground");
         //キャラクタの半分よりちょっと下までレイを飛ばす
-        float distance = SpriteHeight * 0.6f;
-        float width = BoxColliderWidth * 1.0f;
+        float distance = SpriteHeight * 0.7f;
+        float width = BoxColliderWidth * 1.1f;
         float[] xList = { X - width, X, X + width };
         foreach (float px in xList)
         {
