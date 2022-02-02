@@ -45,8 +45,6 @@ public class Player : Token
 
     //反転させる
     bool _isR = true;
-
-    bool isJump = false;
     public bool isReverse()
     {
         return _isR;
@@ -144,6 +142,11 @@ public class Player : Token
     [SerializeField]float _timer;
     [SerializeField] GameObject s;
 
+    static bool _isJump;
+    public static bool IsJump{
+        set{return _isJump; }
+    }
+
 
     void Update()
     {
@@ -174,7 +177,7 @@ public class Player : Token
             //ジャンプ判定
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                isJump = true;
+                _isJump = true;
                 // ジャンプする
                 if (_JumpCount > 1)
                 {
@@ -220,7 +223,7 @@ public class Player : Token
         int mask = 1 << LayerMask.NameToLayer("Ground");
         //キャラクタの半分よりちょっと下までレイを飛ばす
         float distance = SpriteHeight * 0.6f;
-        float width = BoxColliderWidth * 0.8f;
+        float width = BoxColliderWidth * 1.0f;
         float[] xList = { X - width, X, X + width };
         foreach (float px in xList)
         {
@@ -229,6 +232,7 @@ public class Player : Token
             if (hit.collider != null && hit.collider.gameObject.GetComponent<Reverse>().isActive)
             {
                 //着地できた
+                _isJump = false;
                 return true;
             }
         }
